@@ -13,7 +13,7 @@ from ..tools import clean_text
 
 class LiveManager:
     BASE_URL = "https://liveball.sx"
-    MATCH_URL = urljoin(BASE_URL, "matches/{}-{}-{}")
+    MATCH_URL = urljoin(BASE_URL, "matches/{:02d}-{:02d}-{:02d}")
     
     def __init__(self, browser: Browser, max_workers: int = config.max_worker):
         self.browser = browser

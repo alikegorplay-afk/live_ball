@@ -16,7 +16,6 @@ async def main():
                 
                 browser = await p.chromium.launch()
                 manager = LiveManager(browser)
-                
                 today_matches = await manager.get_today_matches()
                 if not today_matches:
                     logger.warning("Не удалось получить данные, повтор операции")
