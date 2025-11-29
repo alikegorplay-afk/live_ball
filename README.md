@@ -8,8 +8,8 @@
 ## Клонирование репозитория
 
 ```bash
-git clone <url-репозитория>
-cd <папка-проекта>
+git clone https://github.com/alikegorplay-afk/live_ball.git
+cd live_ball
 ```
 
 ## Установка зависимостей
