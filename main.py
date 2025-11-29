@@ -14,7 +14,7 @@ async def main():
             while True:
                 result = {}
                 
-                browser = await p.chromium.launch()
+                browser = await p.chromium.launch(headless=config.headless, timeout=config.timeout)
                 manager = LiveManager(browser)
                 today_matches = await manager.get_today_matches()
                 if not today_matches:

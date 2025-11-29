@@ -8,3 +8,4 @@ log:
 max_worker: 5
 headless: True
 delay: 1800
+timeout: 60

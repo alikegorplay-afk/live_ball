@@ -24,6 +24,7 @@ class Config:
     max_worker: int = 5
     headless: bool = False
     delay: float = 1_800
+    timeout: float = 60 * 1000
     
     def __post_init__(self):
         try:
@@ -43,6 +44,7 @@ class Config:
             self.max_worker = int(config.get("max_worker", 5))
             self.headless = bool(config.get("headless", False))
             self.delay = int(config.get("delay", 1_800))
+            self.timeout = float(config.get("timeout", 60)) * 1000
             
         except Exception as e:
             logger.error(f"Аргумент не правильный (error={e})")
