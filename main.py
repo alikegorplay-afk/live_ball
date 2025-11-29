@@ -26,6 +26,8 @@ async def main():
                 
                 for task in asyncio.as_completed(tasks):
                     response = await task
+                    if response is None:
+                        continue
                     result[response.id] = response.to_dict()
                 
                 with open(config.save_file, 'w', encoding='utf-8') as file:
