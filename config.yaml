@@ -1,4 +1,4 @@
-debug: True
+debug: False
 save_file: "data.json"
 
 log:
