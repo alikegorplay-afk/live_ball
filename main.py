@@ -8,13 +8,15 @@ from src.manager.live_manager import LiveManager
 from src.core import config
 
 async def main():
+    print(config.proxy)
+    exit(1)
     async with async_playwright() as p:
         browser = None
         try:
             while True:
                 result = {}
                 
-                browser = await p.chromium.launch(headless=config.headless, timeout=config.timeout, proxy = config.server)
+                browser = await p.chromium.launch(headless=config.headless, timeout=config.timeout, proxy = config.proxy)
                 manager = LiveManager(browser)
                 today_matches = await manager.get_today_matches()
                 if not today_matches:
