@@ -47,6 +47,8 @@ class Config:
             self.timeout = float(config.get("timeout", 60)) * 1000
             self.sleep_delay = float(config.get("sleep_delay", 5))
             
+            self.server: dict[str, str] = config.get("proxy")
+            
         except Exception as e:
             logger.error(f"Аргумент не правильный (error={e})")
         

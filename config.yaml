@@ -10,3 +10,7 @@ headless: True
 delay: 1800
 timeout: 60
 sleep_delay: 5
+proxy:
+  server: "PROXY-URL"
+  username: "USERNAME"
+  password: "PASSWORD"

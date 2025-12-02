@@ -164,7 +164,7 @@ class LiveManager:
         """
         try:
             logger.info(f"Попытка получить данные (url={url})")
-            response = await page.goto(url)
+            response = await page.goto(url, timeout=config.timeout)
             if not response or not response.ok:
                 logger.warning(f"Не ожиданный код ответа (url={url}, status={response.status if response else "unknown"})")
                 await asyncio.sleep(config.sleep_delay * random.uniform(0.1, 2))
