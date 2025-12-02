@@ -14,7 +14,14 @@ async def main():
             while True:
                 result = {}
                 
-                browser = await p.chromium.launch(headless=config.headless, timeout=config.timeout, proxy = config.proxy)
+                launch_args = {
+                    'headless': config.headless,
+                    'timeout': config.timeout
+                }
+                if config.proxy:
+                    launch_args['proxy'] = config.proxy
+                    
+                browser = await p.chromium.launch(**launch_args)
                 manager = LiveManager(browser)
                 today_matches = await manager.get_today_matches()
                 if not today_matches:

@@ -47,7 +47,7 @@ class Config:
             self.timeout = float(config.get("timeout", 60)) * 1000
             self.sleep_delay = float(config.get("sleep_delay", 5))
             
-            self.proxy: dict[str, str] = config.get("proxy")
+            self.proxy: dict[str, str] | None = config.get("proxy")
             self.max_try = max(int(config.get("max_try", 1)), 1)
             
         except Exception as e:
