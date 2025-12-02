@@ -14,7 +14,7 @@ async def main():
             while True:
                 result = {}
                 
-                browser = await p.chromium.launch(headless=config.headless, timeout=config.timeout, proxy = {"server": "resident.proxyshard.com:8080", "username": "LZi6C1bR31-country-ru-region-moscow-sid-5cft5ydyl3vg-filter-medium", "password": "LrvBohcPaR"})
+                browser = await p.chromium.launch(headless=config.headless, timeout=config.timeout, proxy = config.server)
                 manager = LiveManager(browser)
                 today_matches = await manager.get_today_matches()
                 if not today_matches:
