@@ -8,8 +8,6 @@ from src.manager.live_manager import LiveManager
 from src.core import config
 
 async def main():
-    print(config.proxy)
-    exit(1)
     async with async_playwright() as p:
         browser = None
         try:
