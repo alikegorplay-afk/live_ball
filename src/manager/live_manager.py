@@ -162,26 +162,26 @@ class LiveManager:
         Returns:
             bool (True | False): True если запрос успешный иначе False
         """
-        try:
-            logger.info(f"Попытка получить данные (url={url})")
-            response = await page.goto(url, timeout=config.timeout)
-            if not response or not response.ok:
-                logger.warning(f"Не ожиданный код ответа (url={url}, status={response.status if response else "unknown"})")
+        for indx in range(1, config.max_try + 1):
+            try:
+                logger.info(f"Попытка получить данные (url={url}, try={indx}, max_try={config.max_try})")
+                response = await page.goto(url, timeout=config.timeout)
+                if not response or not response.ok:
+                    logger.warning(f"Не ожиданный код ответа (url={url}, status={response.status if response else "unknown"}, try={indx})")
+                    await asyncio.sleep(config.sleep_delay * random.uniform(0.1, 2))
+                
+                logger.info(f"Удалось получить данные (url={url}, status={response.status}, try={indx})")
                 await asyncio.sleep(config.sleep_delay * random.uniform(0.1, 2))
+                return True
+            except TimeoutError as e:
+                logger.error(f"Не удалось получить данные за указанное время (error={e}, try={indx})")
+                logger.info("Рекемендуется использовать VPN/PROXY с европейским IP")
+            
+            except TargetClosedError:
+                logger.warning("Браузер закрыт, невозможно получить данные")
                 return False
             
-            logger.info(f"Удалось получить данные (url={url}, status={response.status})")
-            await asyncio.sleep(config.sleep_delay * random.uniform(0.1, 2))
-            return True
-        except TimeoutError as e:
-            logger.error(f"Не удалось получить данные за указанное время (error={e})")
-            logger.info("Рекемендуется использовать VPN/PROXY с европейским IP")
-            return False
-        
-        except TargetClosedError:
-            logger.warning("Браузер закрыт, невозможно получить данные")
-            return False
-        
-        except Exception as e:
-            logger.error(f"Не удалось получить данные (error={e})")
-            return False
+            except Exception as e:
+                logger.error(f"Не удалось получить данные (error={e}, try={indx})")
+        logger.error(f"Не получилось получить данные за {config.max_try} попыток")
+        return False

@@ -48,6 +48,7 @@ class Config:
             self.sleep_delay = float(config.get("sleep_delay", 5))
             
             self.proxy: dict[str, str] = config.get("proxy")
+            self.max_try = max(int(config.get("max_try", 1)), 1)
             
         except Exception as e:
             logger.error(f"Аргумент не правильный (error={e})")

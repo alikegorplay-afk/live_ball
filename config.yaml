@@ -7,9 +7,13 @@ log:
 
 max_worker: 5
 headless: True
+
 delay: 1800
 timeout: 60
+
 sleep_delay: 5
+max_try: 3
+
 proxy:
   server: "PROXY-URL"
   username: "USERNAME"
