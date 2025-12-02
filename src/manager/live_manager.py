@@ -1,4 +1,5 @@
 import asyncio
+import random
 from urllib.parse import urljoin
 from datetime import date
 
@@ -166,9 +167,11 @@ class LiveManager:
             response = await page.goto(url)
             if not response or not response.ok:
                 logger.warning(f"Не ожиданный код ответа (url={url}, status={response.status if response else "unknown"})")
+                await asyncio.sleep(config.sleep_delay * random.uniform(0.1, 2))
                 return False
             
             logger.info(f"Удалось получить данные (url={url}, status={response.status})")
+            await asyncio.sleep(config.sleep_delay * random.uniform(0.1, 2))
             return True
         except TimeoutError as e:
             logger.error(f"Не удалось получить данные за указанное время (error={e})")
